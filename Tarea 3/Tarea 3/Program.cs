@@ -145,10 +145,10 @@ static void AddContact(List<int> ids, Dictionary<int, string> names, Dictionary<
         Console.Write("\nEnter last name: ");
         lastname = Console.ReadLine();
 
-        if (!string.IsNullOrWhiteSpace(lastname))
+        if (!string.IsNullOrEmpty(lastname))
             break;
 
-        Console.WriteLine("❌ The last name cannot be empty. Please try again.\n");
+        Console.WriteLine("The last name cannot be empty. Please try again.\n");
     }
 
     string address;
@@ -157,10 +157,10 @@ static void AddContact(List<int> ids, Dictionary<int, string> names, Dictionary<
         Console.Write("\nEnter address: ");
         address = Console.ReadLine();
 
-        if (!string.IsNullOrWhiteSpace(address))
+        if (!string.IsNullOrEmpty(address))
             break;
 
-        Console.WriteLine("❌ The address cannot be empty. Please try again.\n");
+        Console.WriteLine("The address cannot be empty. Please try again.\n");
     }
 
     string phone;
