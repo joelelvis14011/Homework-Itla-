@@ -133,10 +133,10 @@ static void AddContact(List<int> ids, Dictionary<int, string> names, Dictionary<
         Console.Write("Enter first name: ");
         name = Console.ReadLine();
 
-        if (!string.IsNullOrWhiteSpace(name))
+        if (!string.IsNullOrEmpty(name))
             break;
 
-        Console.WriteLine("❌ The name cannot be empty. Please try again.\n");
+        Console.WriteLine("The name cannot be empty. Please try again.\n");
     }
 
     string lastname;
