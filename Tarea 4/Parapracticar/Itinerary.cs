@@ -106,7 +106,7 @@ namespace Parapracticar
                     }
                     else
                     {
-                        break; // ✅ Email válido y no duplicado
+                        break; 
                     }
                 }
                 else
@@ -157,7 +157,7 @@ namespace Parapracticar
                 }
             }
 
-            // Guardar contacto
+            // Save Contact
             contacts.Add(new Contact(GetNextId(), name, lastname, phone, email, address, age, isBestFriend));
 
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -195,7 +195,7 @@ namespace Parapracticar
                     contact.IsBestFriend ? "Yes" : "No");
             }
         }
-
+        //Search contact 
         public Contact SearchContact(int id)
         {
             var contact = contacts.FirstOrDefault(c => c.Id == id);
@@ -207,7 +207,7 @@ namespace Parapracticar
             }
             return contact;
         }
-
+        //Search by Name    
         public void SearchByName(string name)
         {
             var results = contacts.Where(c => c.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
@@ -228,7 +228,7 @@ namespace Parapracticar
             }
             Console.ResetColor();
         }
-
+        //Edit Contact 
         public void EditContact(int id)
         {
             var contact = SearchContact(id);

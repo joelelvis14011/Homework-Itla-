@@ -27,11 +27,10 @@ namespace Parapracticar
 
         public override string ToString()
         {
-            // Si es mejor amigo, resaltamos en verde
             if (IsBestFriend)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("★ BEST FRIEND ★");
+                Console.WriteLine("BEST FRIEND");
                 Console.ResetColor();
             }
 
