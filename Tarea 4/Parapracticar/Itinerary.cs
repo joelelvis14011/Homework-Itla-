@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Parapracticar
 {
@@ -36,6 +37,7 @@ namespace Parapracticar
             Console.WriteLine("=== Add New Contact ===");
             Console.ResetColor();
 
+            // Name
             string name;
             do
             {
@@ -49,9 +51,11 @@ namespace Parapracticar
                 }
             } while (string.IsNullOrEmpty(name));
 
+            // Lastname
             Console.Write("Last name: ");
             string lastname = Console.ReadLine();
 
+            // Phone
             string phone;
             while (true)
             {
@@ -72,19 +76,52 @@ namespace Parapracticar
                 return;
             }
 
-            Console.Write("Email: ");
-            string email = Console.ReadLine();
-            if (!string.IsNullOrEmpty(email) && contacts.Any(c => c.Email == email))
+            // Email
+            string email;
+            while (true)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error: A contact with this email already exists.");
-                Console.ResetColor();
-                return;
+                Console.Write("Email: ");
+                email = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Email cannot be empty.");
+                    Console.ResetColor();
+                    continue;
+                }
+
+                // Validación con regex
+                string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                bool formatOk = Regex.IsMatch(email, pattern);
+                bool hasDoubleDot = email.Contains("..");
+
+                if (formatOk && !hasDoubleDot)
+                {
+                    if (contacts.Any(c => c.Email == email))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Error: A contact with this email already exists.");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        break; // ✅ Email válido y no duplicado
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Invalid email format. Must contain '@' and '.' in correct positions, and no '..'.");
+                    Console.ResetColor();
+                }
             }
 
+            // Address
             Console.Write("Address: ");
             string address = Console.ReadLine();
 
+            // Age
             int age;
             Console.Write("Age: ");
             while (!int.TryParse(Console.ReadLine(), out age) || age <= 0)
@@ -95,6 +132,7 @@ namespace Parapracticar
                 Console.Write("Age: ");
             }
 
+            // Best Friend
             bool isBestFriend;
             while (true)
             {
@@ -114,10 +152,17 @@ namespace Parapracticar
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Error: Please enter ' y= yes ' for yes or ' n = no' for no.");
+                    Console.WriteLine("Error: Please enter 'y' = yes or 'n' = no.");
                     Console.ResetColor();
                 }
             }
+
+            // Guardar contacto
+            contacts.Add(new Contact(GetNextId(), name, lastname, phone, email, address, age, isBestFriend));
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Contact added successfully!");
+            Console.ResetColor();
         }
 
         public void ViewContacts()
@@ -150,7 +195,6 @@ namespace Parapracticar
                     contact.IsBestFriend ? "Yes" : "No");
             }
         }
-
 
         public Contact SearchContact(int id)
         {
@@ -219,4 +263,5 @@ namespace Parapracticar
         }
     }
 }
+
 

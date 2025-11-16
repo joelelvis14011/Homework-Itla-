@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-//Contacto  (Donde se crea la capa de datos)
 namespace Parapracticar
 {
     public class Contact
@@ -18,23 +13,35 @@ namespace Parapracticar
         public int Age { get; set; }
         public bool IsBestFriend { get; set; }
 
-
-        public Contact(int id, string name, string Lastname, string phone, string email, string address, int age, bool IsBestFriend)
+        public Contact(int id, string name, string lastname, string phone, string email, string address, int age, bool isBestFriend)
         {
             Id = id;
             Name = name;
-            this.Lastname = Lastname;
+            Lastname = lastname;
             Phone = phone;
             Email = email;
             Address = address;
             Age = age;
-            this.IsBestFriend = IsBestFriend;
+            IsBestFriend = isBestFriend;
         }
-
 
         public override string ToString()
         {
-            return $"{Id} | {Name} | {Phone} | {Email} | {Address}";
+            // Si es mejor amigo, resaltamos en verde
+            if (IsBestFriend)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("★ BEST FRIEND ★");
+                Console.ResetColor();
+            }
+
+            return $"ID: {Id}\n" +
+                   $"Name: {Name} {Lastname}\n" +
+                   $"Phone: {Phone}\n" +
+                   $"Email: {Email}\n" +
+                   $"Address: {Address}\n" +
+                   $"Age: {Age}\n" +
+                   $"Best Friend: {(IsBestFriend ? "Yes" : "No")}";
         }
     }
 }
