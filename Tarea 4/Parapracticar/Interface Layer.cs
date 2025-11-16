@@ -120,11 +120,6 @@ namespace Parapracticar
             return input;
         }
 
-        // Helper: read optional string (can be empty)
-        static string ReadString(string prompt)
-        {
-            Console.Write(prompt);
-            return Console.ReadLine();
-        }
+       
     }
 }
